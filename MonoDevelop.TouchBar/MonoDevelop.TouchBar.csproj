@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <AddinReference Include="MonoDevelop.Debugger" />
+    <AddinReference Include="MonoDevelop.MacPlatform" />
   </ItemGroup>
 </Project>

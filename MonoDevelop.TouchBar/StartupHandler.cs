@@ -6,6 +6,8 @@ using MonoDevelop.Projects;
 using AppKit;
 using System.Diagnostics;
 using System.Linq;
+using Xwt.Mac;
+using MonoDevelop.MacInterop;
 
 namespace TouchbarAddin
 {
@@ -25,7 +27,7 @@ namespace TouchbarAddin
         {
             get
             {
-                return NSApplication.SharedApplication.KeyWindow ?? NSApplication.SharedApplication.Windows.First();
+                return IdeApp.Workbench.RootWindow != null ? GtkQuartz.GetWindow (IdeApp.Workbench.RootWindow) : null;
             }
         }
 
