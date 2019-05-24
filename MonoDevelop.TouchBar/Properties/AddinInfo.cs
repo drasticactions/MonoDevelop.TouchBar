@@ -30,7 +30,7 @@ using Mono.Addins.Description;
 [assembly: Addin(
     "MonoDevelop.TouchBar",
     Namespace = "MonoDevelop.TouchBar",
-    Version = "0.0.3"
+    Version = "0.0.4"
 )]
 
 [assembly: AddinName("MonoDevelop.TouchBar")]

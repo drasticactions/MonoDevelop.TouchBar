@@ -28,6 +28,7 @@ namespace TouchbarAddin
                 return NSApplication.SharedApplication.KeyWindow ?? NSApplication.SharedApplication.Windows.First();
             }
         }
+
         private bool SupportsTouchBar() => ObjCRuntime.Class.GetHandle("NSTouchBar") != IntPtr.Zero;
         private MonoDevelopProjectTouchBarDelegate Delegate = new MonoDevelopProjectTouchBarDelegate();
         public StartupHandler()
@@ -132,6 +133,11 @@ namespace TouchbarAddin
 
     public class MonoDevelopProjectTouchBarDelegate : MonoDevelopTouchBarDelegate
     {
+        internal static IBuildTarget GetRunTarget()
+        {
+            return IdeApp.ProjectOperations.CurrentSelectedSolution ?? IdeApp.ProjectOperations.CurrentSelectedBuildTarget;
+        }
+
         public bool IsRunning { get; set; } = false;
 
         public new static string[] DefaultIdentifiers = {
@@ -198,7 +204,7 @@ namespace TouchbarAddin
             switch (control.SelectedSegment)
             {
                 case 0:
-                    if (IdeApp.ProjectOperations.CurrentSelectedProject == null)
+                    if (IdeApp.ProjectOperations.CurrentSelectedBuildTarget == null)
                         return;
                     if (DebuggingService.IsPaused)
                         DebuggingService.Resume();
@@ -220,12 +226,16 @@ namespace TouchbarAddin
 
         private void Build_Activated(object sender, EventArgs e)
         {
-            if (IdeApp.ProjectOperations.CurrentSelectedProject == null)
+            if (IdeApp.ProjectOperations.CurrentSelectedBuildTarget == null)
                 return;
-            if (IdeApp.ProjectOperations.IsRunning(IdeApp.ProjectOperations.CurrentSelectedSolution))
+            if (DebuggingService.IsRunning && !DebuggingService.IsPaused)
                 DebuggingService.Stop();
             else
-                IdeApp.ProjectOperations.Debug(IdeApp.ProjectOperations.CurrentSelectedProject);
+            {
+                var target = GetRunTarget();
+                if (target != null)
+                    IdeApp.ProjectOperations.Debug(target);
+            }
         }
     }
 }
