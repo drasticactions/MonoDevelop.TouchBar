@@ -2,9 +2,9 @@
 // AddinInfo.cs
 //
 // Author:
-//       Mikayla Hutchinson <m.j.hutchinson@gmail.com>
+//       drasticactions
 //
-// Copyright (c) 2017 Microsoft Corp.
+// Copyright (c) 2019 Microsoft Corp.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,10 @@ using Mono.Addins.Description;
 [assembly: Addin(
     "MonoDevelop.TouchBar",
     Namespace = "MonoDevelop.TouchBar",
-    Version = "1.0.1"
+    Version = "1.0.3"
 )]
 
 [assembly: AddinName("MonoDevelop.TouchBar")]
 [assembly: AddinCategory("IDE extensions")]
 [assembly: AddinDescription("MonoDevelop.TouchBar")]
-[assembly: AddinAuthor("Mikayla Hutchinson")]
+[assembly: AddinAuthor("drasticactions")]

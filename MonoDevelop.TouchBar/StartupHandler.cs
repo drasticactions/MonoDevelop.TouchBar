@@ -48,8 +48,6 @@ namespace TouchbarAddin
         {
             if (!SupportsTouchBar())
                 return;
-            if (Window == null)
-                return;
             MakeTouchBar();
             IdeApp.Workspace.WorkspaceItemOpened += OnSoultionOpened;
             IdeApp.Workspace.WorkspaceItemClosed += OnSoultionClosed;
